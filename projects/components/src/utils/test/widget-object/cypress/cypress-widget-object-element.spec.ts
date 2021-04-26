@@ -101,6 +101,17 @@ describe('CypressWidgetObjectElement', () => {
             expect(getSpy).toHaveBeenCalledWith('@1', { timeout: undefined });
             expect(findSpy).toHaveBeenCalledWith(FakeWidget.tagName, undefined);
         });
+
+        fit('uses the current element to find the widget', () => {
+            spyOn(cy, 'get').and.callFake(() => new MockCy());
+            const findSpy = spyOn(cy, 'find').and.callFake(() => new MockCy());
+            const widget = new CypressWidgetObjectElement(cy, true, '1');
+            const find2 = widget.get('a').parents('a');
+            const findSpy2 = spyOn(find2.unwrap(), 'find').and.returnValue(new MockCy());
+            find2.findWidget(FakeWidget, {});
+            expect(findSpy).toHaveBeenCalledTimes(0);
+            expect(findSpy2).toHaveBeenCalledWith(FakeWidget.tagName, undefined);
+        });
     });
 
     describe('parents', () => {

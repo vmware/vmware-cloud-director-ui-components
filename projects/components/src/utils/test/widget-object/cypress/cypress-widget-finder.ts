@@ -4,14 +4,14 @@
  */
 
 import { IdGenerator } from '../../../id-generator/id-generator';
-import { BaseWidgetObject, FindableWidget, FindElementOptions } from '../widget-object';
+import { BaseWidgetObject, ElementActions, FindableWidget, FindElementOptions } from '../widget-object';
 import { CypressWidgetObjectElement } from './cypress-widget-object-element';
 
 declare const cy;
-const idGenerator = new IdGenerator('cy-id');
+export const cypressWidgetIdGenerator = new IdGenerator('cy-id');
 
 export interface FindCypressWidgetOptions extends FindElementOptions {
-    ancestor?: string;
+    ancestor?: string | ElementActions;
     options?: { timeout: number };
 }
 
@@ -36,11 +36,18 @@ export class CypressWidgetObjectFinder<T> {
         widgetConstructor: FindableWidget<T, W>,
         findOptions?: FindCypressWidgetOptions
     ): W {
-        const id = idGenerator.generate();
+        const id = cypressWidgetIdGenerator.generate();
 
-        const ancestor = findOptions?.ancestor
-            ? cy.get(findOptions?.ancestor, { timeout: findOptions?.options?.timeout })
-            : cy.get('body', { timeout: findOptions?.options?.timeout });
+        let ancestor: any;
+        if (findOptions?.ancestor) {
+            if (typeof findOptions.ancestor == 'string') {
+                ancestor = cy.get(findOptions?.ancestor, { timeout: findOptions?.options?.timeout });
+            } else {
+                ancestor = findOptions?.ancestor;
+            }
+        } else {
+            ancestor = cy.get('body', { timeout: findOptions?.options?.timeout });
+        }
         const parentWidget = new CypressWidgetObjectElement(ancestor, false, undefined);
         let query = widgetConstructor.tagName;
         if (findOptions?.cssSelector) {
