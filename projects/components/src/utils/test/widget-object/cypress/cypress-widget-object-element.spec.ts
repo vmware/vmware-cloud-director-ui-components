@@ -98,11 +98,11 @@ describe('CypressWidgetObjectElement', () => {
             const findSpy = spyOn(cy, 'find').and.callThrough();
             const widget = new CypressWidgetObjectElement(cy, true, '1');
             widget.findWidget(FakeWidget, {});
-            expect(getSpy).toHaveBeenCalledWith('@1', { timeout: undefined });
+            expect(getSpy).toHaveBeenCalledWith('@1');
             expect(findSpy).toHaveBeenCalledWith(FakeWidget.tagName, undefined);
         });
 
-        fit('uses the current element to find the widget', () => {
+        it('uses the current element to find the widget', () => {
             spyOn(cy, 'get').and.callFake(() => new MockCy());
             const findSpy = spyOn(cy, 'find').and.callFake(() => new MockCy());
             const widget = new CypressWidgetObjectElement(cy, true, '1');

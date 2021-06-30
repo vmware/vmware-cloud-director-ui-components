@@ -8,7 +8,7 @@ import { BaseWidgetObject, ElementActions, FindableWidget, FindElementOptions } 
 import { CypressWidgetObjectElement } from './cypress-widget-object-element';
 
 declare const cy;
-export const cypressWidgetIdGenerator = new IdGenerator('cy-id');
+const cypressWidgetIdGenerator = new IdGenerator('cy-id');
 
 export interface FindCypressWidgetOptions extends FindElementOptions {
     ancestor?: string | ElementActions;

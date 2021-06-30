@@ -10,7 +10,7 @@ import {
     FindElementOptions,
     WidgetObjectElement,
 } from '../widget-object';
-import { cypressWidgetIdGenerator, CypressWidgetObjectFinder, FindCypressWidgetOptions } from './cypress-widget-finder';
+import { CypressWidgetObjectFinder, FindCypressWidgetOptions } from './cypress-widget-finder';
 
 declare const cy;
 
