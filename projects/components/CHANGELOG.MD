@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- A bug where findWidget in Cypress searched from the root rather than from the current widget
+
 ## [2.0.0-rc.0]
 
 ### No Changes

@@ -25,6 +25,12 @@ declare const cy;
  * we could not load the Cypress types in our library.
  */
 export class CypressWidgetObjectElement<T extends ElementActions> implements WidgetObjectElement<T> {
+    /**
+     *
+     * @param chainable the chainable that represents the current element.
+     * @param isRoot if the current element refers to the same element that the alias refers to.
+     * @param alias refers to the alias of the root element of this current element.
+     */
     constructor(private chainable: T, private isRoot: boolean, private alias: string) {}
 
     /**
@@ -115,7 +121,7 @@ export class CypressWidgetObjectElement<T extends ElementActions> implements Wid
      * @inheritdoc
      */
     findWidget<W extends BaseWidgetObject<T>>(widget: FindableWidget<T, W>, findOptions: FindCypressWidgetOptions): W {
-        return new CypressWidgetObjectFinder<T>().find(widget, { ancestor: '@' + this.alias, ...findOptions });
+        return new CypressWidgetObjectFinder<T>().find(widget, { ancestor: this.getBase(), ...findOptions });
     }
 
     /**
