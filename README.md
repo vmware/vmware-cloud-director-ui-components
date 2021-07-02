@@ -99,3 +99,10 @@ To get further help, please file issues on github.
 
 To get more help on the Angular CLI use `ng help` or go check out the
 [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Components package versions corresponding to VMware cloud director(VCD) application releases
+
+| VCD app releases        | GIT tags           | Components package versions  |
+| ------------- |:-------------:| -----:|
+| 10.2.0      | components-v1.0.0 | 1.0.0 |
+| 10.2.1      | components-v1.1.0      |   1.1.0 |
